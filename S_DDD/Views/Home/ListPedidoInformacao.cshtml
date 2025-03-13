@@ -1,0 +1,92 @@
+﻿@model PagedList.IPagedList<S_DDD.Context.tb_pedido_informacao>
+@using PagedList.Mvc
+@using PagedList
+
+@{
+    ViewBag.Title = "ListPedidoInformacao";
+}
+
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .pagination li {
+            display: inline;
+            padding: 5px 10px;
+        }
+
+        .pagination .active a {
+            background-color: #007bff;
+            color: white;
+        }
+</style>
+
+<!-- Logo -->
+<div class="logo-container text-center mb-4">
+    <img src="/Content/Img/LOGO-INE.png" style="width: 9em;">
+</div>
+
+<!-- Card Principal -->
+<div class="card shadow p-4 bg-light">
+    <h2 class="text-center mb-4" style="font-size: 18px;">LISTA DE PEDIDOS DE INFORMAÇÃO</h2>
+
+    <!-- Formulário de Pesquisa -->
+    <div class="card shadow p-3 mb-4">
+        <form method="get" action="@Url.Action("ListPedidoInformacao", "Home")">
+            <div class="input-group">
+                <input type="text" name="nome" class="form-control" placeholder="Pesquisar por Nome" />
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Tabela de Pedidos -->
+    <div class="card shadow p-4">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th>Data</th>
+                    <th>Ponto de Situação</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="@(item.ponto_situacao == "RESPONDIDO" ? "table-success" : "table-danger")">
+                        <td>@item.nome</td>
+                        <td>@item.data_solicitacao</td>
+                        <td class="text-center text-white">
+                            <span class="badge @(item.ponto_situacao == "RESPONDIDO" ? "bg-success" : "bg-danger")">@item.ponto_situacao</span>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("DetalhePedidos", new { id = item.id_pedido_informacao })" class="btn btn-info">Informação</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Controles de Paginação -->
+        <div class="text-center">
+            @Html.PagedListPager(Model, page => Url.Action("ListPedidoInformacao", new { page }), new PagedListRenderOptions
+            {
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                MaximumPageNumbersToDisplay = 5,
+                DisplayEllipsesWhenNotShowingAllPageNumbers = true
+            })
+        </div>
+    </div>
+
+    <!-- Botão Adicionar -->
+    <div class="text-center mt-3">
+        <a href="@Url.Action("AddPedidoInformacao")" class="btn btn-success">Adicionar Novo Pedido</a>
+    </div>
+</div>

@@ -1,0 +1,276 @@
+﻿@model S_DDD.Context.tb_trabalho_cientifico
+@{
+    ViewBag.Title = "EditTrabalho";
+}
+
+<style>
+    .form-container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ddd;
+    }
+
+    .alinhar {
+        text-align: center
+    }
+</style>
+
+<img src="/Content/Img/LOGO-INE.png" style="width: 14em;">
+
+<div class="container mt-5">
+    <div class="form-container">
+        <!--------------------------------------------------------FIM DO FORMULARIO------------------------------------------------------------->
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            FORMULÁRIO DE SUBMISSÃO DE TRABALHOS CIENTÍFICOS
+        </button>
+        @using (Html.BeginForm("EditTrabalho", "Home", FormMethod.Post))
+        {
+            <div class="form-container">
+                <!--1 PRIMEIRA LINHA DO FORMULARIO---------------------------------------------------------------------------------------------->
+                <h2>Dados do Trabalho</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Título do Trabalho</label>
+                            @Html.TextBoxFor(x => x.titulo, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <!--- -->
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome do Autor</label>
+                            @Html.TextBoxFor(x => x.nome, new { @class = "form-control", @id = "nome" })
+                        </div>
+                    </div>
+                    <!--- -->
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label asp-for="Data">Ano de Conclusão</label>
+                            @Html.TextBoxFor(x => x.ano_conclusao, new { @class = "form-control" })
+                            <span asp-validation-for="Data" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--2 SEGUNDA LINHA DO FORMULARIO---------------------------------------------------------------------------------------------->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Tipo de Trabalho</label>
+                            @Html.DropDownList("tipo_trabalho", new List<SelectListItem> {
+                                 new SelectListItem {Text="Monografia",  Value ="mografia"},
+                                 new SelectListItem {Text="Dissertação",  Value ="dissertação"},
+                                 new SelectListItem {Text="Tese",  Value ="tese"},
+                                 new SelectListItem {Text="Relatório Técnico",  Value ="relatório récnico "} },
+                                 "Seleccione uma opcao",
+                                 new { @class = "form-select" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Instituição de Ensino</label>
+                            @Html.TextBoxFor(x => x.instituicao_ensino, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Curso</label>
+                            @Html.TextBoxFor(x => x.curso, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <!--3 TERCEIRA LINHA DO FORMULARIO---------------------------------------------------------------------------------------------->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Resumo</label>
+                            @Html.TextBoxFor(x => x.resumo, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Palavras-chave (Mínimo 3, Máximo 6): </label>
+                            @Html.TextBoxFor(x => x.palavra_chave, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Area de Estudo</label>
+                            @Html.DropDownList("area_estudo", new List<SelectListItem> {
+                              new SelectListItem {Text="Estatística Aplicada",  Value ="estatística eplicada "},
+                              new SelectListItem {Text="Censos Populacionais",  Value ="censos populacionais "},
+                              new SelectListItem {Text="Economia",  Value ="economia "},
+                              new SelectListItem {Text="Big Data",  Value ="big data"},
+                              new SelectListItem {Text="Outro",  Value ="outro"}},
+                              "Seleccione uma Opção",
+                              new { @class = "form-select" })
+                        </div>
+                    </div>
+                </div>
+                <!--4 QUARTA LINHA DO FORMULARIO---------------------------------------------------------------------------------------------->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Objectivo do Trabalho</label>
+                            @Html.TextBoxFor(x => x.objectivo_trabalho, new { @class = "form-control", @id = "nome" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Metodologias Utilizadas</label>
+                            @Html.DropDownList("metodologia", new List<SelectListItem> {
+                               new SelectListItem {Text="Qualitativa",  Value ="qualitativa "},
+                               new SelectListItem {Text="Quantitativa",  Value ="quantitativa "},
+                               new SelectListItem {Text="Mista",  Value ="economia "},
+                               new SelectListItem {Text="Modelagem",  Value ="modelagem "},
+                               new SelectListItem {Text="Big Data",  Value ="big data"},
+                               new SelectListItem {Text="Outro",  Value ="outro"}},
+                               "Seleccione uma Opção",
+                               new { @class = "form-select" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Temática Principal Relacionada ao INE</label>
+                            @Html.DropDownList("tematica_principal", new List<SelectListItem> {
+                               new SelectListItem {Text="Estatísticas Oficiais",  Value ="estatísticas oficiais "},
+                               new SelectListItem {Text="Indicadores Socioeconômicos",  Value ="indicadores socioeconômicos"},
+                               new SelectListItem {Text="Censos e Pesquisas",  Value ="censos e pesquisas"},
+                               new SelectListItem {Text="Métodos de Recolha de Dados",  Value ="métodos de Recolha de dados"},
+                               new SelectListItem {Text="Outro",  Value ="outro"}},
+                               "Seleccione uma Opção",
+                               new { @class = "form-select" })
+                        </div>
+                    </div>
+                </div>
+                <!--5 QUINTA LINHA DO FORMULARIO---------------------------------------------------------------------------------------------->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Possível Aplicação no INE</label>
+                            @Html.DropDownList("possivel_aplicacao", new List<SelectListItem> {
+                               new SelectListItem {Text="Sim",  Value ="Sim"},
+                               new SelectListItem {Text="não ",  Value ="Não"}},
+                               "Seleccione uma Opção",
+                               new { @class = "form-select" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Área do INE Relacionada ao Tema</label>
+                            @Html.TextBoxFor(x => x.departamento, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Fontes de Dados Utilizadas</label>
+                            @Html.DropDownList("fonte_utilizada", new List<SelectListItem> {
+                               new SelectListItem {Text="Censos do INE",  Value ="censos do ine"},
+                               new SelectListItem {Text="Base de Dados Estatísticas",  Value ="base de dados estatísticas"},
+                               new SelectListItem {Text="Pesquisas Amostrais",  Value ="pesquisas amostrais"},
+                               new SelectListItem {Text="Outro",  Value ="outro"}},
+                               "Seleccione uma Opção",
+                               new { @class = "form-select" })
+                        </div>
+                    </div>
+                </div>
+                <!--6 SESTA LINHA DO FORMULARIO---------------------------------------------------------------------------------------------->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Disponibilidade dos Dados</label>
+                            @Html.DropDownList("desponibilidades_dados", new List<SelectListItem> {
+                               new SelectListItem {Text="Público",  Value ="público"},
+                               new SelectListItem {Text="Restrito",  Value ="restrito"}},
+                               "Seleccione uma Opção",
+                               new { @class = "form-select" })
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Contém informações sigilosas</label>
+                            @Html.DropDownList("restricao", new List<SelectListItem> {
+                               new SelectListItem {Text="Sim",  Value ="sim"},
+                               new SelectListItem {Text="Não",  Value ="não"}},
+                               "Seleccione uma Opção",
+                               new { @class = "form-select" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Se sim Especifique</label>
+                            @Html.TextBoxFor(x => x.descrever_restricao, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <!--7 SETIMA LINHA DO FORMULARIO---------------------------------------------------------------------------------------------->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Formato Disponível</label>
+                            <select class="form-select" required>
+                                <option value="">Selecione</option>
+                                <option value="digital">Digital</option>
+                                <option value="papel">Papel</option>
+                                <option value="ambos">Ambos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Link De Acesso (se disponível online): </label>
+                            @Html.TextBoxFor(x => x.link, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Autorização para Consulta Pública? </label>
+                            @Html.DropDownList("autorizacao", new List<SelectListItem> {
+                               new SelectListItem {Text="Sim",  Value ="sim"},
+                               new SelectListItem {Text="Não",  Value ="não"}},
+                               "Seleccione uma Opção",
+                               new { @class = "form-select" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Carregar arquivo</label>
+                            <input type="file" name="arquivoExcel" class="form-control">
+                            <small class="text-muted">Envie um arquivo .xlsx com os produtos</small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-------------------------------------------------FORMULARIO DO ORIENTADOR--------------------------------------------------------->
+            <div class="form-container">
+                <div class="alinhar">Dados do Orientador</div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Orientador</label>
+                        @Html.TextBoxFor(x => x.orentador, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Instituição do Orientador</label>
+                        @Html.TextBoxFor(x => x.organizacao_orientador, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-success">Salvar Alterações</button>
+                    <a href="@Url.Action("ListTrabalhos")" class="btn btn-primary">Cancelar</a>
+                </div>
+            <!----------------------------------------------------------FIM DO FORMULARIO---------------------------------------------------------------->
+        }
+    </div>
+</div>
+

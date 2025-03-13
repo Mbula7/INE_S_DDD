@@ -1,0 +1,114 @@
+﻿@model List<S_DDD.Context.tb_trabalho_cientifico>
+
+@{
+    ViewBag.Title = "DetalheTrabalhoCientifico";
+}
+
+<!-- Logo -->
+<div class="logo-container text-center mb-4">
+    <img src="/Content/Img/LOGO-INE.png" style="width: 9em;">
+</div>
+
+<!-- Card Principal -->
+<div class="card shadow p-4 bg-light form-container">
+    @foreach (var item in Model)
+    {
+        <!-- Título -->
+        <div class="form-title">
+            <h2>@item.nome</h2>
+        </div>
+
+        <!-- Informações do Trabalho Científico -->
+        <div class="form-section-title">Informações do Trabalho</div>
+        <table class="table table-bordered mt-3">
+            <tbody>
+                <!-- Tabela com os Detalhes do Trabalho -->
+                <tr>
+                    <td><strong>Título</strong></td>
+                    <td>@item.titulo</td>
+                </tr>
+                <tr>
+                    <td><strong>Ano de Conclusão</strong></td>
+                    <td>@item.ano_conclusao</td>
+                </tr>
+                <tr>
+                    <td><strong>Tipo de Trabalho</strong></td>
+                    <td>@item.tipo_trabalho</td>
+                </tr>
+                <tr>
+                    <td><strong>Instituição de Ensino</strong></td>
+                    <td>@item.instituicao_ensino</td>
+                </tr>
+                <tr>
+                    <td><strong>Curso</strong></td>
+                    <td>@item.curso</td>
+                </tr>
+                <tr>
+                    <td><strong>Informação Procurada</strong></td>
+                    <td>@item.instituicao_ensino</td>
+                </tr>
+                <tr>
+                    <td><strong>Resumo</strong></td>
+                    <td>@item.resumo</td>
+                </tr>
+                <tr>
+                    <td><strong>Palavra-Chave</strong></td>
+                    <td>@item.palavra_chave</td>
+                </tr>
+                <tr>
+                    <td><strong>Área de Estudo</strong></td>
+                    <td>@item.area_estudo</td>
+                </tr>
+                <tr>
+                    <td><strong>Objetivo de Trabalho</strong></td>
+                    <td>@item.objectivo_trabalho</td>
+                </tr>
+                <tr>
+                    <td><strong>Metodologias</strong></td>
+                    <td>@item.metodologia</td>
+                </tr>
+                <tr>
+                    <td><strong>Temática Principal</strong></td>
+                    <td>@item.tematica_principal</td>
+                </tr>
+                <tr>
+                    <td><strong>Possível Aplicação no INE</strong></td>
+                    <td>@item.possivel_aplicacao</td>
+                </tr>
+                <tr>
+                    <td><strong>Departamento</strong></td>
+                    <td>@item.departamento</td>
+                </tr>
+                <tr>
+                    <td><strong>Fonte Utilizada</strong></td>
+                    <td>@item.fonte_utilizada</td>
+                </tr>
+                <tr>
+                    <td><strong>Data da Atualização</strong></td>
+                    <td>@item.data_atulizacao</td>
+                </tr>
+                <tr>
+                    <td><strong>Ficheiro</strong></td>
+                    <td>
+                        @if (item.formato_doc != null && item.formato_doc.Length > 0)
+                        {
+                            <a href="@Url.Action("Download", "PedidoInformacao", new { id = item.id_trabalho_cientifico })" class="btn btn-info btn-custom">Baixar Ficheiro</a>
+                        }
+                        else
+                        {
+                            <span>Nenhum ficheiro disponível</span>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+
+    <!-- Ações -->
+    <div class="text-center mt-3">
+        <a href="#" class="btn btn-success btn-custom">Editar</a>
+        <a href="#" class="btn btn-primary btn-custom">Imprimir</a>
+    </div>
+
+
+</div>

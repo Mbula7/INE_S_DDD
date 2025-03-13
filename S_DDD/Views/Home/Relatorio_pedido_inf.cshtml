@@ -1,0 +1,253 @@
+﻿@model List<S_DDD.Context.tb_pedido_informacao>
+
+@{
+    ViewBag.Title = "MostrarResultados";
+}
+
+<!-- Logo -->
+<div class="logo-container text-center mb-4">
+    <img src="/Content/Img/LOGO-INE.png" style="width: 9em;">
+</div>
+
+<!-- Card Principal -->
+<div class="card shadow p-4 bg-light">
+    <h2 class="text-center mb-4" style="font-size: 18px;">RELATÓRIO PEDIDOS DE INFORMAÇÃO</h2>
+
+    <!-- Abas -->
+    <ul class="nav nav-tabs" id="relatorioTabs" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="pedidos-tab" data-bs-toggle="tab" data-bs-target="#pedidos" type="button" role="tab">Pesquisa</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="graficos-tab" data-bs-toggle="tab" data-bs-target="#graficos" type="button" role="tab">Gráficos</button>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="relatorioTabsContent">
+        <!----------------------------- Aba Pedidos por temas ---------------------------------------------->
+        <div class="tab-pane fade show active" id="pedidos" role="tabpanel">
+            <div class="card shadow p-3 mb-4">
+                <form method="get" action="@Url.Action("ContarPedidos")" id="formPedidos">
+                    <div class="row g-3">
+                        <!---------------------------- Tema ------------------------------->
+                        <div class="col-md-3">
+                            <label class="form-label">Temas:</label>
+                            <select class="form-select form-select-sm" name="tema">
+                                <option value="">-- Selecione --</option>
+                                <option value="Produto Interno Bruto (PIB)">Produto Interno Bruto (PIB)</option>
+                                <option value="Índice de Preços ao Consumidor (IPC)">Índice de Preços ao Consumidor (IPC)</option>
+                                <option value="Índice de Actividade Económica (IAE)">Índice de Actividade Económica (IAE)</option>
+                                <option value="Conjuntura Económica">Conjuntura Económica</option>
+                                <option value="CENSOS – especificar">CENSOS – especificar</option>
+                                <option value="Projeções da população 2017 – 2040">Projeções da população 2017 – 2040</option>
+                                <option value="Estatísticas e indicadores Sociais">Estatísticas e indicadores Sociais</option>
+                                <option value="População">População</option>
+                                <option value="Inquérito ao Orçamento Familiar (IOF)">Inquérito ao Orçamento Familiar (IOF)</option>
+                                <option value="Inquérito Demográfico de Saúde (IDS)">Inquérito Demográfico de Saúde (IDS)</option>
+                                <option value="Direitos Humanos">Direitos Humanos</option>
+                                <option value="Anuários">Anuários</option>
+                            </select>
+                        </div>
+
+                        <!----------------------------- Provincia -------------------------->
+                        <div class="col-md-3">
+                            <label class="form-label">Província:</label>
+                            <select class="form-select form-select-sm" name="provincia">
+                                <option value="">-- Selecione --</option>
+                                <option value="Cabo Delgado">Cabo Delgado</option>
+                                <option value="Niassa">Niassa</option>
+                                <option value="Nampula">Nampula</option>
+                                <option value="Zambézia">Zambézia</option>
+                                <option value="Tete">Tete</option>
+                                <option value="Manica">Manica</option>
+                                <option value="Sofala">Sofala</option>
+                                <option value="Inhambane">Inhambane</option>
+                                <option value="Gaza">Gaza</option>
+                                <option value="Maputo">Maputo</option>
+                                <option value="Cidade de Maputo">Cidade de Maputo</option>
+                            </select>
+                        </div>
+
+                        <!--------------------- Profissão ------------------------------->
+                        <div class="col-md-3">
+                            <label class="form-label">Profissão:</label>
+                            <select class="form-select form-select-sm" name="profissao">
+                                <option value="">-- Selecione --</option>
+                                <option value="Estudante">Estudante</option>
+                                <option value="Assistente de Projecto">Assistente de Projecto</option>
+                                <option value="Missionário">Missionário</option>
+                                <option value="Docente">Docente</option>
+                                <option value="Funcionário">Funcionário</option>
+                                <option value="Militar">Militar</option>
+                                <option value="Agrónomo">Agrónomo</option>
+                                <option value="Jurista">Jurista</option>
+                                <option value="Arquiteto">Arquiteto</option>
+                            </select>
+                        </div>
+
+                        <!-------------------------- Grau de Escolaridade ------------------------>
+                        <div class="col-md-3">
+                            <label class="form-label">Grau Academico:</label>
+                            <select class="form-select form-select-sm" name="escolaridade">
+                                <option value="">-- Selecione --</option>
+                                <option value="Básico">Básico</option>
+                                <option value="Médio">Médio</option>
+                                <option value="Superior">Superior</option>
+                                <option value="Mestrado">Mestrado</option>
+                                <option value="Doutorado">Doutorado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!------------------------ Filtros de Data ------------------------>
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-3">
+                            <label>Início:</label>
+                            <input class="form-control" type="date" name="dataInicio" />
+                        </div>
+                        <div class="col-md-3">
+                            <label>Fim:</label>
+                            <input class="form-control" type="date" name="dataFim" />
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="card shadow p-3 mb-4">
+                <h3 class="text-center mb-4" style="font-size: 16px;">RESULTADOS ENCONTRADOS</h3>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td><strong>Total de Registos Pendentes</strong></td>
+                            <td>
+                                <a href="#">@ViewBag.TotalPendentes</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total de Registo Respondidos</strong></td>
+                            <td>
+                                <a href="#">@ViewBag.TotalRespondidos</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!---------------------------------------------- LISTAR PESQUISADOS ---------------------------------->
+
+            @if (Model != null && Model.Any())
+            {
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Data da Solicitação</th>
+                            <th>Tema</th>
+                            <th>Província</th>
+                            <th>Data da Resposta</th>
+                            <th>Escolaridade</th>
+                            <th>Ponto de Situação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pedido in Model)
+                        {
+                            <tr>
+                                <td>@pedido.data_solicitacao</td>
+                                <td>@pedido.tema_pesquisa</td>
+                                <td>@pedido.provincia</td>
+                                @if (pedido.ponto_situacao == "PENDENTE")
+                                {
+                                    <td>--------------------</td>
+                                }
+                                else
+                                {
+                                    <td>@pedido.data_atulizacao</td>
+                                }
+                                <td>@pedido.escolaridade</td>
+                                <td>
+                                    <span class="badge @(pedido.ponto_situacao == "PENDENTE" ? "bg-warning" : "bg-success")">
+                                        @pedido.ponto_situacao
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-danger text-center mt-3">
+                    <i class="fas fa-exclamation-triangle"></i> Nenhum pedido encontrado com os filtros aplicados.
+                </div>
+            }
+
+            <!-- Exportar -->
+            <div class="mt-4 text-center">
+                <a href="#" class="btn btn-success">Exportar</a>
+            </div>
+        </div>
+        <!--------------------------------------------- TRAZER A LISTA -------------------------------------------->
+        <!----------------------------------------------------------------------------------------------------------
+        <!-- Aba Gráficos -->
+        <div class="tab-pane fade" id="graficos" role="tabpanel">
+            <div class="card shadow p-4">
+                <h3 class="text-center">Gráficos</h3>
+                <p>Gráficos representando os pedidos de informação.</p>
+                <!----------------------------------------- RESULTADO DOS GRAFICOS ------------------------------->
+
+                <canvas id="grafico" width="200" height="100"></canvas>
+
+                @section Scripts{
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+                    <script>
+                        $(document)
+                            .ready(function () {
+                        var ctx = $('#grafico');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                datasets: [{
+                                    label: '# of Votes',
+                                    data: [12, 19, 3, 5, 2, 3],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(255, 206, 86, 0.2)',
+                                        'rgba(75, 192, 192, 0.2)',
+                                        'rgba(153, 102, 255, 0.2)',
+                                        'rgba(255, 159, 64, 0.2)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                      });
+                    </script>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+

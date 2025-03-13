@@ -1,0 +1,266 @@
+﻿@model S_DDD.Context.tb_pedido_informacao
+@{
+    ViewBag.Title = "AddPedidoInformacao";
+}
+
+<style>
+    .form-container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ddd;
+    }
+
+    .form-title {
+        background-color: #007bff;
+        color: white;
+        padding: 15px;
+        border-radius: 10px 10px 0 0;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .input-group-text {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .error {
+        color: red;
+        font-size: 0.9em;
+    }
+
+    .form-section-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #007bff;
+    }
+
+    .btn-custom {
+        width: 100%;
+        font-weight: bold;
+    }
+</style>
+
+<div class="logo-container" style="position: relative; top: 0; text-align: center;">
+    <img src="/Content/Img/LOGO-INE.png" style="width: 9em;">
+</div>
+
+@using (Html.BeginForm("AddPedidoInformacao", "Home", FormMethod.Post))
+{
+    <div class="form-container">
+        <div class="form-title">
+            SUBMETER PEDIDO DE INFORMAÇÃO
+        </div>
+        <div class="p-3">
+            <p>
+                O preenchimento de todos os campos é de caracter obrigatório (*). Por favor, preencha correctamente e com sinceridade os dados pessoais.
+                Após o envio do seu pedido, receberá uma confirmação automática.
+            </p>
+
+            <div class="form-section-title">DADOS</div>
+            <div class="row">
+                <!------------------------------------------>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label>
+                            Nome:
+                            @Html.ValidationMessageFor(x => x.nome, "", new { @class = "error" })
+                        </label>
+                        @Html.TextBoxFor(x => x.nome, new { @class = "form-control", placeholder = "Digite seu nome" })
+                    </div>
+                </div>
+                <!------------------------------------------>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label>
+                            Telefone:
+                            @Html.ValidationMessageFor(x => x.telefone, "", new { @class = "error" })
+                        </label>
+                        @Html.TextBoxFor(x => x.telefone, new { @class = "form-control", placeholder = "Digite o telefone" })
+                    </div>
+                </div>
+                <!------------------------------------------>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label>
+                            Email:
+                            @Html.ValidationMessageFor(x => x.email, "", new { @class = "error" })
+                        </label>
+                        @Html.TextBoxFor(x => x.email, new { @class = "form-control", placeholder = "Digite o email" })
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------------------------------------>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label>
+                            Residência:
+                            @Html.ValidationMessageFor(x => x.residencia, "", new { @class = "error" })
+                        </label>
+                        @Html.TextBoxFor(x => x.residencia, new { @class = "form-control", placeholder = "Digite a residência" })
+                    </div>
+                </div>
+                <!------------------------------------------>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label>
+                            Profissão:
+                            @Html.ValidationMessageFor(x => x.proficao, "", new { @class = "error" })
+                        </label>
+                        @Html.DropDownList("proficao", new List<SelectListItem> {
+                            new SelectListItem {Text="Estudante", Value ="estudante"},
+                            new SelectListItem {Text="Assistente de Projecto", Value ="assistente de projecto"},
+                            new SelectListItem {Text="Missionário", Value ="missionário"},
+                            new SelectListItem {Text="Docente", Value ="docente"},
+                            new SelectListItem {Text="Funcionário", Value ="funcionário"},
+                            new SelectListItem {Text="Militar", Value ="militar"},
+                            new SelectListItem {Text="Agrónomo", Value ="agrónomo"},
+                            new SelectListItem {Text="Jurista", Value ="jurista"},
+                            new SelectListItem {Text="Arquiteto", Value ="arquiteto"}
+                        }, "-- Seleccione uma opção --", new { @class = "form-select" })
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------------------------------------------>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label>
+                            Nacionalidade:
+                            @Html.ValidationMessageFor(x => x.nacionalidade, "", new { @class = "error" })
+                        </label>
+                        @Html.DropDownList("nacionalidade", new List<SelectListItem> {
+                            new SelectListItem {Text="Moçambicana", Value ="moçambicana"},
+                            new SelectListItem {Text="Estrangeiro", Value ="estrangeiro"},
+                            new SelectListItem {Text="Sem Informação", Value ="sem informação"}
+                        }, "-- Seleccione uma opção --", new { @class = "form-select" })
+                    </div>
+                </div>
+            </div>
+            <!------------------------------------------------------------------------------------------------------------------------------------------------>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label>
+                            Grau academico:
+                            @Html.ValidationMessageFor(x => x.escolaridade, "", new { @class = "error" })
+                        </label>
+                        @Html.DropDownList("escolaridade", new List<SelectListItem> {
+                            new SelectListItem {Text="Básico", Value ="Básico"},
+                            new SelectListItem {Text="Medio", Value ="Medio"},
+                            new SelectListItem {Text="Superior", Value ="Superior"},
+                            new SelectListItem {Text="Mestrado", Value ="Mestrado"},
+                            new SelectListItem {Text="Doutorado ", Value ="Doutorado"}
+                        }, "-- Seleccione uma opção --", new { @class = "form-select" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label>
+                            Tema de pesquisa:
+                            @Html.ValidationMessageFor(x => x.tema_pesquisa, "", new { @class = "error" })
+                        </label>
+                        @Html.DropDownList("tema_pesquisa", new List<SelectListItem> {
+                            new SelectListItem {Text="Produto Interno Bruto (PIB)", Value ="Produto Interno Bruto (PIB)"},
+                            new SelectListItem {Text="Índice de Preços ao Consumidor (IPC)", Value ="Índice de Preços ao Consumidor (IPC)"},
+                            new SelectListItem {Text="Índice de Actividade Económica (IAE)", Value ="Índice de Actividade Económica (IAE)"},
+                            new SelectListItem {Text="Conjuntura Económica", Value ="Conjuntura Económica"},
+                            new SelectListItem {Text="CENSOS – especificar", Value ="CENSOS – especificar"},
+                            new SelectListItem {Text="Projeções da população 2017 – 2040", Value ="Projeções da população 2017 – 2040"},
+                            new SelectListItem {Text="Estatísticas e indicadores Sociais", Value ="Estatísticas e indicadores Sociais"},
+                            new SelectListItem {Text="População", Value ="População"},
+                            new SelectListItem {Text="Inquérito ao Orçamento Familiar (IOF)", Value ="Inquérito ao Orçamento Familiar (IOF)"},
+                            new SelectListItem {Text="Inquérito Demográfico de Saúde (IDS)", Value ="Inquérito Demográfico de Saúde (IDS)"}
+                        }, "-- Seleccione uma opção --", new { @class = "form-select" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label>
+                            Finalidade da Informação:
+                            @Html.ValidationMessageFor(x => x.finalidade_informacao, "", new { @class = "error" })
+                        </label>
+                        @Html.TextBoxFor(x => x.finalidade_informacao, new { @class = "form-control", placeholder = "Digite a finalidade" })
+                    </div>
+                </div>
+                <!------------------------------------------>
+                <!------------------------------------------>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label>
+                            Informação Solicitada:
+                            @Html.ValidationMessageFor(x => x.inf_solicitada, "", new { @class = "error" })
+                        </label>
+                        @Html.TextAreaFor(x => x.inf_solicitada, new { @class = "form-control", placeholder = "Digite a informação necessária", rows = "4" }) 
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label>
+                            Província:
+                            @Html.ValidationMessageFor(x => x.provincia, "", new { @class = "error" })
+                        </label>
+                        @Html.DropDownList("provincia", new List<SelectListItem> {
+                            new SelectListItem {Text="Cabo Delgado", Value ="Cabo Delgado"},
+                            new SelectListItem {Text="Niassa", Value ="Niassa"},
+                            new SelectListItem {Text="Nampula", Value ="Nampula"},
+                            new SelectListItem {Text="Zambézia", Value ="Zambézia"},
+                            new SelectListItem {Text="Tete", Value ="Tete"},
+                            new SelectListItem {Text="Manica", Value ="Manica"},
+                            new SelectListItem {Text="Sofala", Value ="Inhambane"},
+                            new SelectListItem {Text="Gaza", Value ="Gaza"},
+                            new SelectListItem {Text="Maputo", Value ="Maputo"},
+                            new SelectListItem {Text="Cidade de Maputo", Value ="Cidade de Maputo"}
+                        }, "-- Seleccione uma opção --", new { @class = "form-select" })
+                    </div>
+                </div>
+            </div>
+            <!------------------------------------------------------------------------------------------------------------------------>
+            <div class="row">
+
+                <div class="form-section-title">CARREGAR DOCUMENTO</div>
+                <div class="mb-3">
+                    <label class="form-label">Anexar Arquivo:</label>
+                    <input type="file" name="arquivoExcel" class="form-control">
+                    <small class="text-muted">Envie um arquivo .pdf, .doc ou .docx</small>
+                </div>
+
+            </div>
+
+            <div class="mt-3 text-center">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <button type="submit" class="btn btn-success">Submeter</button>
+                    <a href="@Url.Action("ListPedidoInformacao")" class="btn btn-primary">Ir para a Lista</a>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-success">Submeter</button>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success text-center mt-3">
+        @TempData["MensagemSucesso"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger mt-3">@Html.Raw(TempData["ErrorMessage"])</div>
+}
+
+

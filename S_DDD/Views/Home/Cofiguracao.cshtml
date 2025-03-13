@@ -1,0 +1,57 @@
+﻿@model S_DDD.Context.tb_confiuracoes
+@{
+    ViewBag.Title = "Configuração";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-center">
+        <img src="/Content/Img/LOGO-INE.png" style="width: 9em;">
+    </div>
+
+    <div class="card shadow p-4 text-dark">
+        <h2 class="text-center mb-4">CONFIGURAÇÕES</h2>
+
+        <!---------------------------- Configuração de Usuário ---------------------------->
+        <div class="card shadow p-4 mb-4">
+            <h3 class="fs-5">USUÁRIO</h3>
+            <a href="@Url.Action("Register","Account")" class="btn btn-primary mt-2">Registrar Novo Usuário</a>
+        </div>
+
+        <!---------------------------- Formulário de Configurações ---------------------------->
+        <div class="card shadow p-4">
+            <h3 class="fs-5">Configurações Gerais</h3>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+            }
+
+            @using (Html.BeginForm("Save", "Settings", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <!-- Tipo de Configuração -->
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.tipo_config, new { @class = "form-label fw-bold" })
+                    @Html.DropDownListFor(m => m.tipo_config, new SelectList(new[] { "Light", "Dark" }), new { @class = "form-select" })
+                </div>
+
+                <!-- Ativar Configuração (Checkbox) -->
+                <div class="form-check mb-3">
+                    @Html.LabelFor(m => m.user_config, new { @class = "form-check-label" })
+                </div>
+
+                <!-- Seleção de Idioma -->
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.user_config, new { @class = "form-label fw-bold" })
+                    @Html.DropDownListFor(m => m.user_config, new SelectList(new[] { "pt-BR", "en-US", "es-ES" }), new { @class = "form-select" })
+                </div>
+
+                <!-- Botão de Enviar -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary w-50">Salvar Configurações</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

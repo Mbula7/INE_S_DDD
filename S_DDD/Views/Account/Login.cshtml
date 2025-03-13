@@ -1,0 +1,54 @@
+﻿@using S_DDD.Models
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<section class="bg-light d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4 rounded-4" style="width: 28rem;">
+        <div class="text-center mb-4">
+            <img src="/Content/Img/LOGO-INE.png" style="width: 10em;">
+            <h3 class="text-primary fw-bold mt-3">@ViewBag.Title</h3>
+            <p class="text-muted">Use o formulário para fazer login</p>
+        </div>
+
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="mb-3 w-100">
+                @Html.LabelFor(m => m.Email, new { @class = "form-label fw-semibold" })
+                <div class="input-group w-100">
+                    <span class="input-group-text bg-primary text-white"><i class="bi bi-envelope"></i></span>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control w-100", placeholder = "Digite seu e-mail" })
+                </div>
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3 w-100">
+                @Html.LabelFor(m => m.Password, new { @class = "form-label fw-semibold" })
+                <div class="input-group w-100">
+                    <span class="input-group-text bg-primary text-white"><i class="bi bi-lock"></i></span>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control w-100", placeholder = "Digite sua senha" })
+                </div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-3 w-100">
+                <div class="form-check">
+                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input" })
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "form-check-label text-muted" })
+                </div>
+                <a href="#" class="text-primary text-decoration-none">Esqueceu a senha?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 fw-semibold">Entrar</button>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

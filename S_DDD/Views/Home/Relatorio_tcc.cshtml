@@ -1,0 +1,160 @@
+﻿@model List<S_DDD.Context.tb_trabalho_cientifico>
+
+@{
+    ViewBag.Title = "MostrarResultados";
+}
+
+<!-- Logo -->
+<div class="logo-container text-center mb-4">
+    <img src="/Content/Img/LOGO-INE.png" style="width: 9em;">
+</div>
+
+<!-- Card Principal -->
+<div class="card shadow p-4 bg-light">
+    <h2 class="text-center mb-4" style="font-size: 18px;">RELATÓRIO DE TRABALHOS CIENTIFICOS</h2>
+
+    <!-- Abas -->
+    <ul class="nav nav-tabs" id="relatorioTabs" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="pedidos-tab" data-bs-toggle="tab" data-bs-target="#pedidos" type="button" role="tab">Pesquisa</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="graficos-tab" data-bs-toggle="tab" data-bs-target="#graficos" type="button" role="tab">Gráficos</button>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="relatorioTabsContent">
+        <!-- Aba Pesquisa -->
+        <div class="tab-pane fade show active" id="pedidos" role="tabpanel">
+            <div class="card shadow p-3 mb-4">
+                <form method="get" action="@Url.Action("ContarTcc")" id="formPedidos">
+                    <div class="row g-3">
+                        <!-- Área de Estudo -->
+                        <div class="col-md-3">
+                            <label class="form-label">Área de Estudo:</label>
+                            <select class="form-select form-select-sm" name="area_estudo">
+                                <option value="">-- Selecione --</option>
+                                <option value="Estatística Aplicada">Estatística Aplicada</option>
+                                <option value="Censos Geral Populacionais">Censos Geral Populacionais</option>
+                                <option value="Censos de Habitação">Censos de Habitação</option>
+                                <option value="Censos de empresas">Censos de empresas</option>
+                                <option value="Censos Agro-pecoario">Censos Agro-pecoario</option>
+                                <option value="Economia">Economia</option>
+                                <option value="Big Data">Big Data</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+
+                        <!-- Metodologias -->
+                        <div class="col-md-3">
+                            <label class="form-label">Metodologias:</label>
+                            <select class="form-select form-select-sm" name="metodologias">
+                                <option value="">-- Selecione --</option>
+                                <option value="Qualitativa">Qualitativa</option>
+                                <option value="Quantitativa">Quantitativa</option>
+                                <option value="Mista">Mista</option>
+                                <option value="Modelagem">Modelagem</option>
+                                <option value="Big Data">Big Data</option>
+                            </select>
+                        </div>
+
+                        <!-- Tipo de Trabalho -->
+                        <div class="col-md-3">
+                            <label class="form-label">Tipo de Trabalho:</label>
+                            <select class="form-select form-select-sm" name="tipo_trabalho">
+                                <option value="">-- Selecione --</option>
+                                <option value="Monografia">Monografia</option>
+                                <option value="Dissertação">Dissertação</option>
+                                <option value="Tese">Tese</option>
+                                <option value="Relatório Técnico">Relatório Técnico</option>
+                            </select>
+                        </div>
+
+                        <!-- Ano de Conclusão -->
+                        <div class="col-md-3">
+                            <label class="form-label">Ano de conclusão:</label>
+                            <input class="form-control" type="number" name="ano_conclusao" min="1900" max="@DateTime.Now.Year" step="1" placeholder="YYYY" />
+                        </div>
+
+                    </div>
+
+                    <!-- Filtros de Data -->
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Início:</label>
+                            <input class="form-control" type="date" name="dataInicio" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Fim:</label>
+                            <input class="form-control" type="date" name="dataFim" />
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Resultados Encontrados -->
+            <div class="card shadow p-3 mb-4">
+                <h3 class="text-center mb-4" style="font-size: 16px;">RESULTADOS ENCONTRADOS</h3>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td><strong>Total de Registros Pendentes</strong></td>
+                            <td><a href="#">@ViewBag.TotalPendentes</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Listagem de Pesquisados -->
+            @if (Model != null && Model.Any())
+            {
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Autor</th>
+                            <th>Curso</th>
+                            <th>Tipo de Trabalho</th>
+                            <th>Data de Conclusão</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var tcc in Model)
+                        {
+                            <tr>
+                                <td>@tcc.nome</td>
+                                <td>@tcc.curso</td>
+                                <td>@tcc.tipo_trabalho</td>
+                                <td>@tcc.ano_conclusao</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-danger text-center mt-3">
+                    <i class="fas fa-exclamation-triangle"></i> Nenhum pedido encontrado com os filtros aplicados.
+                </div>
+            }
+
+            <!-- Botão de Exportação -->
+            <div class="mt-4 text-center">
+                <a href="#" class="btn btn-success">Exportar</a>
+            </div>
+        </div>
+
+        <!-- Aba Gráficos -->
+        <div class="tab-pane fade" id="graficos" role="tabpanel">
+            <div class="card shadow p-4">
+                <h3 class="text-center">Gráficos</h3>
+                <p>Gráficos representando os pedidos de informação.</p>
+                <div id="histograma" style="width: 100%; height: 500px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

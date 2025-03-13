@@ -1,0 +1,146 @@
+﻿@model List<S_DDD.Context.tb_pedido_informacao>
+
+@{
+    ViewBag.Title = "DetalhePedidos";
+}
+<div class="logo-container" style="position: relative; top: 0;">
+    <img src="/Content/Img/LOGO-INE.png" style="width: 9em;">
+</div>
+<div class="card shadow p-2">
+    <div class="card shadow p-4">
+        <table class="table table-bordered mt-3">
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><strong>Nome do Solicitante</strong></td>
+                        <td>@item.nome</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Telefone</strong></td>
+                        <td>@item.telefone</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email</strong></td>
+                        <td>@item.email</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Província</strong></td>
+                        <td>@item.provincia</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Residencia</strong></td>
+                        <td>@item.residencia</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Profissão</strong></td>
+                        <td>@item.proficao</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nacionalidade</strong></td>
+                        <td>@item.nacionalidade</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Grau Academo</strong></td>
+                        <td>@item.escolaridade</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data da Solicitação</strong></td>
+                        <td>@item.data_solicitacao</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tema de Pesquisa</strong></td>
+                        <td>@item.tema_pesquisa</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Finalidade da informação solicitada</strong></td>
+                        <td>@item.finalidade_informacao</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Informação solicitada</strong></td>
+                        <td>
+                            <div style="text-align: left; white-space: pre-wrap; max-width: 800px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+                                @item.inf_solicitada
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Ficheiro</td>
+                        <td>
+                            @if (item.formato_doc != null && item.formato_doc.Length > 0)
+                            {
+                                <a href="@Url.Action("Download", "PedidoInformacao", new { id = item.id_pedido_informacao})">Baixar Ficheiro</a>
+                            }
+                            else
+                            {
+                                <span>Nenhum ficheiro disponível</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <!----------------------------------------------------------------------------------------------------------------------------------------------------->
+        <div class="card shadow p-4">
+            <h2 style="font-size: 16px;">GERIR PEDIDO </h2>
+            <table class="table table-bordered mt-3">
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+
+                        if (item.ponto_situacao == "RESPONDIDO")
+                        {
+                            <tr>
+                                <td>Ponto da Situação do Pedido</td>
+                                <td class="text-white bg-success text-center">@item.ponto_situacao</td>
+                            </tr>
+                            <tr>
+                                <td>Data do Resposta</td>
+                                <td>@item.data_atulizacao</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>Ponto da Situação do Pedido</td>
+                                <td class="text-white bg-danger text-center">@item.ponto_situacao</td>
+                            </tr>
+                            <tr>
+                                <td>Data da Resposta</td>
+                                <td class="text-center">-----------------------</td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+
+            @foreach (var item in Model)
+            {
+                if (item.ponto_situacao == "RESPONDIDO")
+                {
+                    <div class="mt-3">
+                        <a href="#" class="btn btn-success disabled">Notificado</a>
+                    </div>
+                }
+                else
+                {
+                    <form action="@Url.Action("EditarPontoSituacao", "Home")" method="post">
+                        <input type="hidden" name="id" value="@item.id_pedido_informacao" />
+                        <button type="submit" class="btn btn-success">Notificar</button>
+                    </form>
+                }
+
+            }
+
+
+        </div>
+        <!--------------------------------------------------------------------------------------------------------------------------------------------->
+       </div>
+        <div class="mt-3">
+            <a href="@Url.Action("Home")" class="btn btn-primary">Editar</a>
+            <a href="#" class="btn btn-secondary">Imprimir</a>
+        </div>
+    </div>

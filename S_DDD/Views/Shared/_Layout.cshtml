@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light">
+        <div class="container">
+            @Html.ActionLink("INE-DDD", "Home", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>@Html.ActionLink("HOME", "Home", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("TCC", "ListTrabalhos", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("INFORMAÇÃO", "ListPedidoInformacao", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <!-- Dropdown de Configurações -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                ANÁLISE
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="@Url.Action("Relatorio_pedido_inf", "Home")">Relatório de Pedido de Informação</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Relatorio_tcc", "Home")">Relatório de Trabalhos Científicos</a></li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("CONFIGURAÇÕES", "Cofiguracao", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            }
+            else
+            {
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>@Html.ActionLink("HOME", "Home", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("TCC", "AddTrabalho", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("PEDIDOS", "AddPedidoInformacao", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            }
+
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Produto do Instituto Nacional de Estatística DICRE - DISI V.1.0</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")  <!-- Certifique-se de que o jQuery está carregado antes do Bootstrap -->
+    @Scripts.Render("~/bundles/bootstrap") <!-- Bootstrap JS -->
+    @RenderSection("Scripts", required: false)
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script> <!-- Bootstrap bundle JS que inclui Popper.js -->
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</body>
+</html>

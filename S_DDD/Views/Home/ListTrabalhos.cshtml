@@ -1,0 +1,97 @@
+﻿@model PagedList.IPagedList<S_DDD.Context.tb_trabalho_cientifico>
+@using PagedList.Mvc
+@using PagedList
+
+@{
+    ViewBag.Title = "ListTrabalhos";
+}
+
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .pagination li {
+            display: inline;
+            padding: 5px 10px;
+        }
+
+        .pagination .active a {
+            background-color: #007bff;
+            color: white;
+        }
+</style>
+
+<!-- Logo -->
+<div class="logo-container text-center mb-4">
+    <img src="/Content/Img/LOGO-INE.png" style="width: 9em;">
+</div>
+
+<!-- Card Principal -->
+<div class="card shadow p-4 bg-light">
+    <h2 class="text-center mb-4" style="font-size: 18px;">LISTA DE TRABALHOS SUBMETIDOS</h2>
+
+    <!-- Formulário de Pesquisa -->
+    <div class="card shadow p-3 mb-4">
+        <form method="get" action="@Url.Action("ListTrabalhos", "Home")">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <input type="text" name="nome" class="form-control" placeholder="Pesquisar por Nome" value="@Request.QueryString["nome"]" />
+                </div>
+                <div class="col-md-3 mb-3">
+                    <input type="text" name="titulo" class="form-control" placeholder="Pesquisar por Título" value="@Request.QueryString["titulo"]" />
+                </div>
+                <div class="col-md-2 d-flex align-items-end mb-3">
+                    <button type="submit" class="btn btn-primary w-100">Pesquisar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Tabela de Trabalhos -->
+    <div class="card shadow p-4">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Resumo</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.titulo</td>
+                        <td>@item.nome</td>
+                        <td>@item.resumo</td>
+                        <td>
+                            <a href="@Url.Action("DetalheTrabalhoCientifico", new { id = item.id_trabalho_cientifico })" class="btn btn-info">Informação</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Controles de Paginação -->
+        <div class="text-center">
+            @Html.PagedListPager(Model, page => Url.Action("ListTrabalhos", new { page, nome = Request.QueryString["nome"], titulo = Request.QueryString["titulo"] }), new PagedListRenderOptions
+            {
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                MaximumPageNumbersToDisplay = 5,
+                DisplayEllipsesWhenNotShowingAllPageNumbers = true
+            })
+        </div>
+    </div>
+
+    <!-- Botão Adicionar -->
+    <div class="text-center mt-3">
+        <a href="@Url.Action("AddTrabalho")" class="btn btn-success">Adicionar Novo Trabalho</a>
+    </div>
+</div>

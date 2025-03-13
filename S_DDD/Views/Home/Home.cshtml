@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+<!----------------------------------------------------------------CAROUSEL------------------------------------------------------->
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000" style="position: relative;">
+            <img src="@Url.Content("~/Content/img/Usar_1.png")" class="d-block w-100" alt="Imagem 1" style="object-fit: cover; height: auto; aspect-ratio: 16/6;">
+            <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                      color: white; font-size: 24px; font-weight: bold; text-align: center; width: 100%;">
+                BEM-VINDO À PÁGINA DE GESTÃO DE PEDIDOS DE INFORMAÇÃO ESTATÍSTICA E REGISTO DE TRABALHOS CIENTÍFICOS DO INE
+
+            </p>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000" style="position: relative;">
+            <img src="@Url.Content("~/Content/img/Usar_2.png")" class="d-block w-100" alt="Facebook" style="object-fit: cover; height: auto; aspect-ratio: 16/6;">
+            <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                      color: white; font-size: 24px; font-weight: bold; text-align: center; width: 100%;">
+                BEM-VINDO À PÁGINA DE GESTÃO DE PEDIDOS DE INFORMAÇÃO ESTATÍSTICA E REGISTO DE TRABALHOS CIENTÍFICOS DO INE
+
+            </p>
+        </div>
+        <div class="carousel-item" style="position: relative;">
+            <img src="@Url.Content("~/Content/img/Usar_1.png")" class="d-block w-100" alt="Outra Imagem" style="object-fit: cover; height: auto; aspect-ratio: 16/6;">
+            <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                      color: white; font-size: 24px; font-weight: bold; text-align: center; width: 100%;">
+                BEM-VINDO À PÁGINA DE GESTÃO DE PEDIDOS DE INFORMAÇÃO ESTATÍSTICA E REGISTO DE TRABALHOS CIENTÍFICOS DO INE
+
+            </p>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<!----------------------------------------------------------------FIM DO CAROUSEL------------------------------------------------>
+<!-- Conteúdo Principal -->
+<!-- Seção de Destaque -->
+<div>
+    <section class="bg-white p-6 shadow-md rounded-lg mb-8">
+        <p class="text-gray-700">
+
+        </p>
+    </section>
+</div>
+<div class="row">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Gestão de Recolha e Registo de Trabalhos Científicos</h5>
+
+                <p class="card-text">
+                    Esta página foi concebida para o registo, recolha e gestão de trabalhos científicos produzidos pelos funcionários do INE.
+                </p>
+                <a href="@Url.Action("AddTrabalho")" class="btn btn-primary">Ir para o formulário</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Gestão de pedidos de Informação Estatística</h5>
+                <p class="card-text">
+                    Esta página foi desenvolvida para optimização do registo, acompanhamento e resposta aos pedidos de informação estatística.
+                </p>
+                <a href="@Url.Action("AddPedidoInformacao")" class="btn btn-primary" aria-disabled="true">Ir para o formulário</a>
+            </div>
+        </div>
+    </div>
+</div>
