@@ -3,9 +3,7 @@
 @{
     ViewBag.Title = "DetalhePedidos";
 }
-<div class="logo-container" style="position: relative; top: 0;">
-    <img src="/Content/Img/LOGO-INE.png" style="width: 9em;">
-</div>
+
 <div class="card shadow p-2">
     <div class="card shadow p-4">
         <table class="table table-bordered mt-3">
@@ -94,7 +92,9 @@
                         {
                             <tr>
                                 <td>Ponto da Situação do Pedido</td>
-                                <td class="text-white bg-success text-center">@item.ponto_situacao</td>
+                                <td class="text-white text-center">
+                                    <span class="badge bg-success text-center text-white">@item.ponto_situacao</span>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Data do Resposta</td>
@@ -105,7 +105,9 @@
                         {
                             <tr>
                                 <td>Ponto da Situação do Pedido</td>
-                                <td class="text-white bg-danger text-center">@item.ponto_situacao</td>
+                                <td class="text-white text-center">
+                                    <span class ="badge bg-danger text-center text-white">@item.ponto_situacao</span>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Data da Resposta</td>

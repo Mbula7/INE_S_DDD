@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -14,7 +15,7 @@ namespace S_DDD.Controllers
 {
     public class HomeController : Controller
     {
-        DB_FSTCEntities1 db_con = new DB_FSTCEntities1();
+        DB_FSTCEntities3 db_con = new DB_FSTCEntities3();
         // GET: Home
         public ActionResult Home()
         {
@@ -108,6 +109,8 @@ namespace S_DDD.Controllers
                 data_atulizacao = DateTime.Now,
                 inf_solicitada = model.inf_solicitada, 
                 provincia = model.provincia,
+                ocupacao = model.ocupacao,
+                local_trabalho = model.local_trabalho
             };
 
             // Upload de arquivo
@@ -220,7 +223,28 @@ namespace S_DDD.Controllers
             return View();
         }
 
-        //--------------------- PROCURAR PEDIDO DE INFORMACAO PELO NOME ---------------------------------
+        //--------------------------------ADICIONAR CONFIGURACOES --------------------------------------------
+        [HttpPost]
+        public ActionResult addCofiguracao(tb_confiuracoes model)
+        {
+            
+            tb_confiuracoes tb_conf = new tb_confiuracoes
+            {
+                tipo_config = model.tipo_config,
+                user_config = model.user_config,
+                data_atulizacao = DateTime.Now,
+                email_inf = model.email_inf,
+                contact_inf = model.contact_inf
+            };
+
+            db_con.tb_confiuracoes.Add(tb_conf);
+            db_con.SaveChanges();
+
+            TempData["SuccessMessage"] = "Configuração salva com sucesso!";
+            return View("Cofiguracao");
+        }
+
+        //--------------------- PROCURAR PEDIDO DE INFORMACAO PELO NOME -------------------------------------
         [HttpGet]
         public ActionResult SearchInformacaoPerioda(string nome, DateTime? dataInicio, DateTime? dataFim)
         {

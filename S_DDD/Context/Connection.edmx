@@ -92,6 +92,8 @@
           <Property Name="tipo_config" Type="varchar" MaxLength="255" />
           <Property Name="user_config" Type="varchar" MaxLength="255" />
           <Property Name="data_atulizacao" Type="datetime" Nullable="false" />
+          <Property Name="email_inf" Type="varchar" MaxLength="255" />
+          <Property Name="contact_inf" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="tb_fonte_dados">
           <Key>
@@ -121,6 +123,8 @@
           <Property Name="formato_doc" Type="varbinary(max)" />
           <Property Name="inf_solicitada" Type="nvarchar(max)" />
           <Property Name="provincia" Type="varchar" MaxLength="255" />
+          <Property Name="ocupacao" Type="varchar" MaxLength="255" />
+          <Property Name="local_trabalho" Type="varchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DB_FSTC.dbo.tb_respostas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -405,6 +409,8 @@ warning 6002: The table/view 'DB_FSTC.dbo.tb_utilidade' does not have a primary 
           <Property Name="tipo_config" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="user_config" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="data_atulizacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="email_inf" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="contact_inf" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_fonte_dados">
           <Key>
@@ -434,6 +440,8 @@ warning 6002: The table/view 'DB_FSTC.dbo.tb_utilidade' does not have a primary 
           <Property Name="formato_doc" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="inf_solicitada" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="provincia" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ocupacao" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="local_trabalho" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_respostas" Relationship="Self.PK_pedido_informacao" FromRole="tb_pedido_informacao" ToRole="tb_respostas" />
         </EntityType>
         <EntityType Name="tb_trabalho_cientifico">
@@ -549,7 +557,7 @@ warning 6002: The table/view 'DB_FSTC.dbo.tb_utilidade' does not have a primary 
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="DB_FSTCEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DB_FSTCEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
@@ -590,7 +598,7 @@ warning 6002: The table/view 'DB_FSTC.dbo.tb_utilidade' does not have a primary 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DB_FSTCModelStoreContainer" CdmEntityContainer="DB_FSTCEntities1">
+        <EntityContainerMapping StorageEntityContainer="DB_FSTCModelStoreContainer" CdmEntityContainer="DB_FSTCEntities3">
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="DB_FSTCModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -673,6 +681,8 @@ warning 6002: The table/view 'DB_FSTC.dbo.tb_utilidade' does not have a primary 
                 <ScalarProperty Name="tipo_config" ColumnName="tipo_config" />
                 <ScalarProperty Name="user_config" ColumnName="user_config" />
                 <ScalarProperty Name="data_atulizacao" ColumnName="data_atulizacao" />
+                <ScalarProperty Name="email_inf" ColumnName="email_inf" />
+                <ScalarProperty Name="contact_inf" ColumnName="contact_inf" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -704,6 +714,8 @@ warning 6002: The table/view 'DB_FSTC.dbo.tb_utilidade' does not have a primary 
                 <ScalarProperty Name="formato_doc" ColumnName="formato_doc" />
                 <ScalarProperty Name="inf_solicitada" ColumnName="inf_solicitada" />
                 <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="ocupacao" ColumnName="ocupacao" />
+                <ScalarProperty Name="local_trabalho" ColumnName="local_trabalho" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

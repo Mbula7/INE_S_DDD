@@ -46,11 +46,14 @@
     }
 </style>
 
-<div class="container mt-4">
-    <div class="d-flex justify-content-center">
-        <img src="/Content/Img/LOGO-INE.png" style="width: 9em;">
-    </div>
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<div class="container mt-4">
+  
     <div class="form-container mt-3">
         <div class="form-title">FORMULÁRIO PARA SUBMISSÃO DE TRABALHOS CIENTÍFICOS</div>
 
@@ -60,6 +63,7 @@
 
         @using (Html.BeginForm("AddTrabalho", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
+
             <!-- DADOS DO AUTOR -->
             <div class="form-section-title">DADOS DO AUTOR</div>
 
@@ -336,19 +340,8 @@
             </div>
         }
     </div>
-
 </div>
 
-<!-- Mensagens de Sucesso ou Erro -->
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success mt-3">@TempData["SuccessMessage"]</div>
-}
-
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger mt-3">@Html.Raw(TempData["ErrorMessage"])</div>
-}
 
 <!-- Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">

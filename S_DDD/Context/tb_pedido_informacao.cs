@@ -11,7 +11,8 @@ namespace S_DDD.Context
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tb_pedido_informacao
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,21 +22,50 @@ namespace S_DDD.Context
         }
     
         public int id_pedido_informacao { get; set; }
+
+        [Required(ErrorMessage ="*")]
         public string nome { get; set; }
         public Nullable<int> telefone { get; set; }
+
+        [Required]
+        [EmailAddress]
         public string email { get; set; }
+
+        [Required(ErrorMessage = "*")]
         public string residencia { get; set; }
+
+        [Required(ErrorMessage = "*")]
         public string proficao { get; set; }
+
+        [Required(ErrorMessage = "*")]
         public string nacionalidade { get; set; }
+
+        [Required(ErrorMessage = "*")]
         public string escolaridade { get; set; }
         public Nullable<System.DateTime> data_solicitacao { get; set; }
+
+        [Required(ErrorMessage = "*")]
         public string tema_pesquisa { get; set; }
+
+        [Required(ErrorMessage = "*")]
         public string finalidade_informacao { get; set; }
         public string ponto_situacao { get; set; }
+
+        [Required(ErrorMessage = "*")]
         public Nullable<System.DateTime> data_atulizacao { get; set; }
         public byte[] formato_doc { get; set; }
+
+        [Required(ErrorMessage = "*")]
         public string inf_solicitada { get; set; }
+
+        [Required(ErrorMessage = "*")]
         public string provincia { get; set; }
+
+        [Required(ErrorMessage = "*")]
+        public string ocupacao { get; set; }
+
+        [Required(ErrorMessage = "*")]
+        public string local_trabalho { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_respostas> tb_respostas { get; set; }

@@ -18,5 +18,7 @@ namespace S_DDD.Context
         public string tipo_config { get; set; }
         public string user_config { get; set; }
         public System.DateTime data_atulizacao { get; set; }
+        public string email_inf { get; set; }
+        public string contact_inf { get; set; }
     }
 }

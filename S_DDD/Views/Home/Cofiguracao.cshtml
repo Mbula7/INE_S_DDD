@@ -4,20 +4,18 @@
 }
 
 <div class="container mt-4">
-    <div class="d-flex justify-content-center">
-        <img src="/Content/Img/LOGO-INE.png" style="width: 9em;">
-    </div>
 
     <div class="card shadow p-4 text-dark">
         <h2 class="text-center mb-4">CONFIGURAÇÕES</h2>
 
-        <!---------------------------- Configuração de Usuário ---------------------------->
+        <!-- Configuração de Usuário -->
         <div class="card shadow p-4 mb-4">
             <h3 class="fs-5">USUÁRIO</h3>
-            <a href="@Url.Action("Register","Account")" class="btn btn-primary mt-2">Registrar Novo Usuário</a>
+            <p class="mb-2">Clique no botão abaixo para registrar um novo usuário:</p>
+            <a href="@Url.Action("Register", "Account")" class="btn btn-dark fw-bold">Registrar Novo Usuário</a>
         </div>
 
-        <!---------------------------- Formulário de Configurações ---------------------------->
+        <!-- Formulário de Configurações -->
         <div class="card shadow p-4">
             <h3 class="fs-5">Configurações Gerais</h3>
 
@@ -26,30 +24,31 @@
                 <div class="alert alert-success">@TempData["SuccessMessage"]</div>
             }
 
-            @using (Html.BeginForm("Save", "Settings", FormMethod.Post))
+            @using (Html.BeginForm("addCofiguracao", "Home", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
 
                 <!-- Tipo de Configuração -->
                 <div class="mb-3">
-                    @Html.LabelFor(m => m.tipo_config, new { @class = "form-label fw-bold" })
+                    <lable>Tipo de Configuracao:</lable>
                     @Html.DropDownListFor(m => m.tipo_config, new SelectList(new[] { "Light", "Dark" }), new { @class = "form-select" })
                 </div>
 
-                <!-- Ativar Configuração (Checkbox) -->
-                <div class="form-check mb-3">
-                    @Html.LabelFor(m => m.user_config, new { @class = "form-check-label" })
+                <!-- Email -->
+                <div class="mb-3">
+                    <label>Email de info</label>
+                    @Html.TextBoxFor(m => m.email_inf, new { @class = "form-control", placeholder = "Digite o email" })
                 </div>
 
-                <!-- Seleção de Idioma -->
+                <!-- Contacto -->
                 <div class="mb-3">
-                    @Html.LabelFor(m => m.user_config, new { @class = "form-label fw-bold" })
-                    @Html.DropDownListFor(m => m.user_config, new SelectList(new[] { "pt-BR", "en-US", "es-ES" }), new { @class = "form-select" })
+                    <lable>Contacto de info:</lable>
+                    @Html.TextBoxFor(m => m.contact_inf, new { @class = "form-control", placeholder = "Digite o contacto" })
                 </div>
 
                 <!-- Botão de Enviar -->
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary w-50">Salvar Configurações</button>
+                    <button type="submit" class="btn btn-success fw-bold w-25">Salvar Configurações</button>
                 </div>
             }
         </div>

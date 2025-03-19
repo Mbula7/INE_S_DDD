@@ -3,11 +3,12 @@
 @{
     ViewBag.Title = "MostrarResultados";
 }
-
-<!-- Logo -->
-<div class="logo-container text-center mb-4">
-    <img src="/Content/Img/LOGO-INE.png" style="width: 9em;">
-</div>
+<style>
+    .table-dark-custom {
+        background-color: #D32F2F !important;
+        color: white !important;
+    }
+</style>
 
 <!-- Card Principal -->
 <div class="card shadow p-4 bg-light">
@@ -112,7 +113,7 @@
             @if (Model != null && Model.Any())
             {
                 <table class="table table-bordered table-striped">
-                    <thead class="table-dark">
+                    <thead class="table-dark-custom">
                         <tr>
                             <th>Autor</th>
                             <th>Curso</th>

@@ -13,10 +13,10 @@ namespace S_DDD.Context
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB_FSTCEntities1 : DbContext
+    public partial class DB_FSTCEntities3 : DbContext
     {
-        public DB_FSTCEntities1()
-            : base("name=DB_FSTCEntities1")
+        public DB_FSTCEntities3()
+            : base("name=DB_FSTCEntities3")
         {
         }
     
